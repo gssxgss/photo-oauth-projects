@@ -1,0 +1,8 @@
+# RAILS APP
+
+## setups
+
+```bash
+ $ docker compose run app rails new . --skip-git --skip-action-mailer --skip-action-mailbox --skip-action-text skip-active-job --skip-jbuilder --skip-rubocop --database=postgresql
+ ```
+ 

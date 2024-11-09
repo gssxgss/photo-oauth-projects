@@ -1,11 +1,10 @@
-version: "3.9"
 services:
   db:
     container_name: unifa-project-db
     image: postgres
     restart: always
     volumes:
-      - ./db-data:/var/lib/postgresql/data
+      - db-data:/var/lib/postgresql/data
     environment:
       POSTGRES_USER: user
       POSTGRES_PASSWORD: password
@@ -15,6 +14,7 @@ services:
     container_name: unifa-project-rails
     build:
       context: .
+      dockerfile: ./Dockerfile
     environment:
       - RAILS_MASTER_KEY=$RAILS_MASTER_KEY
       - RAILS_SERVE_STATIC_FILES=1
