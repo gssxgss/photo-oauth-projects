@@ -1,0 +1,42 @@
+version: "3.9"
+services:
+  db:
+    container_name: unifa-project-db
+    image: postgres
+    restart: always
+    volumes:
+      - ./db-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      TZ: "Asia/Tokyo"
+  
+  app:
+    container_name: unifa-project-rails
+    build:
+      context: .
+    environment:
+      - RAILS_MASTER_KEY=$RAILS_MASTER_KEY
+      - RAILS_SERVE_STATIC_FILES=1
+      - RAILS_LOG_TO_STDOUT=true
+      - RAILS_ENV=${RAILS_ENV:-development}
+      - DB_HOST=db
+      - DB_USERNAME=${DB_USERNAME:-user}
+      - DB_PASSWORD=${DB_PASSWORD:-password}
+      - STORAGE_HOST=${STORAGE_HOST:-http://localhost:3000}
+      - EDITOR=vim
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    volumes:
+      - ./rails_app:/rails_app:cached
+      - /app/public/uploads
+      - /app/vendor
+      - /app/tmp
+      - /app/log
+      - /app/.git
+    ports:
+      - "${RAILS_PORT:-3000}:3000"
+    depends_on:
+      - db
+
+volumes:
+  db-data:
