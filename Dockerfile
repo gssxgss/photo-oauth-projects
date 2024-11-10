@@ -25,7 +25,7 @@ WORKDIR $APP_DIR
 COPY ${LOCAL_PATH}/Gemfile ${LOCAL_PATH}/Gemfile.lock ${APP_DIR}/
 RUN bundle install
 
-COPY . .
+# COPY . .
 
 # RUN bundle exec bootsnap precompile --gemfile rails_app/ lib/
 
