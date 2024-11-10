@@ -13,10 +13,10 @@ ENV RAILS_SERVE_STATIC_FILES="true"
 
 
 RUN set -ex \
-    && apt-get update \
+    && apt-get update -qq \
     && apt-get install -y curl gnupg vim \
     && curl -sL https://deb.nodesource.com/setup_22.x | bash - \
-    && apt-get install -y build-essential libvips nodejs libpq-dev postgresql-client file tzdata shared-mime-info  \
+    && apt-get install -y build-essential libjemalloc2 libvips nodejs libpq-dev postgresql-client file tzdata shared-mime-info  \
     && apt-get clean \
     && gem install bundler
 
@@ -25,7 +25,7 @@ WORKDIR $APP_DIR
 COPY ${LOCAL_PATH}/Gemfile ${LOCAL_PATH}/Gemfile.lock ${APP_DIR}/
 RUN bundle install
 
-# COPY . .
+COPY . .
 
 # RUN bundle exec bootsnap precompile --gemfile rails_app/ lib/
 
