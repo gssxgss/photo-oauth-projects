@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
-  # skip_before_action :authenticate_user, only: [:new, :create]
-  # before_action :redirect_if_authenticated, only: [:new, :create]
+  skip_before_action :authenticate_user, only: [:new, :create]
+  before_action :redirect_if_authenticated, only: [:new, :create]
 
   def new
     @user = User.new
@@ -13,7 +13,7 @@ class SessionsController < ApplicationController
       flash[:success] = 'ログイン成功'
       redirect_to root_path
     else
-      flash.now[:danger] = 'ログイン失敗'
+      flash.now[:fail] = 'ログイン失敗'
       render :new
     end
   end

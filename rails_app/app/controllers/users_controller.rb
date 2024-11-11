@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  # skip_before_action :authenticate_user, only: [:new, :create]
-  # before_action :redirect_if_authenticated, only: [:new, :create]
+  skip_before_action :authenticate_user, only: [:new, :create]
+  before_action :redirect_if_authenticated, only: [:new, :create]
 
   def new
     @user = User.new
@@ -11,9 +11,10 @@ class UsersController < ApplicationController
 
     if @user.save
       session[:user_id] = @user.id
-      redirect_to root_path, flash: {success: '登録成功'}
+      flash[:success] = '登録成功'
+      redirect_to root_path
     else
-      flash.now[:danger] = '登録失敗'
+      flash.now[:fail] = '登録失敗'
       render :new
     end
   end
