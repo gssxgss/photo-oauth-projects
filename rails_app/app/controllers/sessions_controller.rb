@@ -20,7 +20,7 @@ class SessionsController < ApplicationController
 
   def destroy
     log_out if logged_in?
-    # flash[:success] = 'ログアウト成功'
+    flash[:success] = 'ログアウト成功'
     redirect_to root_path
   end
 end
