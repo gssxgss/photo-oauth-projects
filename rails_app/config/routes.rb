@@ -9,7 +9,9 @@ Rails.application.routes.draw do
   get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
 
-  # Defines the root path route ("/")
   root "photos#index"
   resources :users, only: [:new, :create]
+  resource :sessions, only: [:new, :create, :destroy]
+  
+  match '*path', to: 'application#page_not_found', via: :all
 end

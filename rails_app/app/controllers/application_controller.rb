@@ -7,4 +7,8 @@ class ApplicationController < ActionController::Base
   
   def redirect_if_authenticated
   end
+
+  def page_not_found
+    render plain: '404 NOT FOUND'
+  end
 end
