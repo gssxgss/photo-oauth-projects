@@ -1,0 +1,30 @@
+<div class="text-center">
+  <h1>ログイン</h1>
+
+  <%= form_with(model: @user, url: login_path, local: true) do |f| %>
+
+    <!-- Display error message of form -->
+    <% if f.object.errors.full_messages.any? %>
+      <ul class='error'>
+        <% f.object.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    <% end %>
+
+    <!-- Field of sessoin form -->
+    <div class='row'>
+      <%= f.label :user_id %>
+      <%= f.text_field :user_id, placeholder: 'user id' %>
+    </div>
+
+    <div class='row'>
+      <%= f.label :password %>
+      <%= f.password_field :password, placeholder: 'password' %>
+    </div>
+
+    <div class='row'>
+      <%= f.submit 'ログイン' %>
+    </div>
+  <% end %>
+</div>
