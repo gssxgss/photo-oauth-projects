@@ -5,10 +5,12 @@
   <p>Hello, <%= current_user.user_id %>
   <p><%= link_to '写真アップロード', new_photo_path %></p>
   <p>You have <%= @photos.length %> photos</p>
-  <div>
+  <div style='display: flex; flex-wrap: wrap; gap: 10px;'>
     <% @photos.each do |photo| %>
-      <%=image_tag photo.image_url, alt: photo.title %>
-      <p><%= photo.title %></p>
+      <div>
+        <%=image_tag photo.image_url, alt: photo.title, width: '200px', height: 'auto' %>
+        <p><%= photo.title %></p>
+      </div>
     <% end %>
   </div>
 </div>
