@@ -3,7 +3,7 @@ class Photo < ApplicationRecord
 
   mount_uploader :image, ImageUploader
 
-  validates :title, presence: true
+  validates :title, presence: true, length: {maximum: 30}
   validates :image, presence: true
 
   scope :by_user_from_latest, -> (user_id) {
