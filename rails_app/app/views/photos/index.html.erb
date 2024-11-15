@@ -4,8 +4,12 @@
   </p>
   <h1>写真一覧</h1>
 
-  <%= link_to 'MyTweetAppと連携', oauth_connect_path %>
 
+  <% unless current_user.access_token %>
+    <%= link_to 'MyTweetAppと連携', oauth_connect_path %>
+  <% else %>
+    <p>MyTweetAppと連携中</p>
+  <% end %>
   <p>Hello, <%= current_user.user_id %>
   <p><%= link_to '写真アップロード', new_photo_path %></p>
   <p>You have <%= @photos.length %> photos</p>

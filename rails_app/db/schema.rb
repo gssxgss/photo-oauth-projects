@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_11_11_152820) do
+ActiveRecord::Schema[7.2].define(version: 2024_11_15_154309) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -28,6 +28,8 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_11_152820) do
     t.string "password_digest", null: false, comment: "User Password Digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "access_token", comment: "TweetAppp token"
+    t.index ["access_token"], name: "index_users_on_access_token", unique: true
     t.index ["user_id"], name: "index_users_on_user_id", unique: true
   end
 
