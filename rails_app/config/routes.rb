@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
 
   root "photos#index"
+
   resources :photos, only: [:new, :create]
 
   get '/register', to: 'users#new'
@@ -17,6 +18,9 @@ Rails.application.routes.draw do
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
+
+  get 'oauth/connect'
+  get 'oauth/callback'
 
   match '*path', to: 'application#page_not_found', via: :all
 end
