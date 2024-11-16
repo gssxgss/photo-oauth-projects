@@ -17,10 +17,10 @@ class SessionsController < ApplicationController
     user = User.find_by(user_id: params[:user_id])
     if user.present? && user.authenticate(params[:password])
       log_in(user)
-      flash[:success] = 'ログイン成功'
+      flash[:success] = "#{user.user_id}様、こんにちは！"
       redirect_to root_path
     else
-      flash.now[:alert] = 'ログイン失敗'
+      @errors.push 'ユーザーIDとパスワードが⼀致するユーザーが存在しない。'
       render :new, status: 401
     end
   end
