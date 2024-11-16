@@ -21,6 +21,7 @@ Rails.application.routes.draw do
 
   get 'oauth/connect'
   get 'oauth/callback'
+  post 'oauth/tweet'
 
   match '*path', to: 'application#page_not_found', via: :all
 end

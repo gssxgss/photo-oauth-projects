@@ -18,6 +18,7 @@
       <div>
         <%=image_tag photo.image_url, alt: photo.title, width: '200px', height: 'auto' %>
         <p><%= photo.title %></p>
+        <%= link_to 'ツイートする', oauth_tweet_path(photo_id: photo.id), data: { turbo_method: :post } %>
       </div>
     <% end %>
   </div>

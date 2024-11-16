@@ -1,7 +1,14 @@
 require "uri"
 require "net/http"
+
+# OAuth 2.0
 # reference: https://openid-foundation-japan.github.io/rfc6749.ja.html
+
 class OauthController < ApplicationController
+  AUTHORIZE_URL = 'http://unifa-recruit-my-tweet-app.ap-northeast-1.elasticbeanstalk.com/oauth/authorize'
+  OAUTH_TOKEN_URL = 'http://unifa-recruit-my-tweet-app.ap-northeast-1.elasticbeanstalk.com/oauth/token'
+  TWEET_URL = 'http://unifa-recruit-my-tweet-app.ap-northeast-1.elasticbeanstalk.com/api/tweets'
+
   def connect
     params = {
       client_id: Rails.application.credentials.oauth.client_id,
@@ -9,7 +16,7 @@ class OauthController < ApplicationController
       redirect_uri: 'http://localhost:3000/oauth/callback',
       scope: 'write_tweet',
     }
-    redirect_to "http://unifa-recruit-my-tweet-app.ap-northeast-1.elasticbeanstalk.com/oauth/authorize?#{params.to_query}", allow_other_host: true
+    redirect_to "#{AUTHORIZE_URL}?#{params.to_query}", allow_other_host: true
   end
 
   def callback
@@ -29,6 +36,29 @@ class OauthController < ApplicationController
     session[:access_token] = parsed_json[:access_token]
     # TODO remove access_token from user
     # current_user.update! access_token: parsed_json[:access_token]
+    redirect_to root_path
+  end
+
+  def tweet
+    # TODO omitting the situation if find_by return nil
+    photo = Photo.find_by!(id: params[:photo_id], user_id: current_user.id)
+    post_params = {
+      text: photo.title,
+      url: photo.image_url,
+    }
+    uri = URI.parse(TWEET_URL)
+    http = Net::HTTP.new(uri.host, uri.port)
+    headers = {
+      'Content-Type': 'application/json',
+      'Authorization': "Bearer #{session[:access_token]}",
+    }
+    response = http.post uri.path, post_params.to_json, headers
+    # NOTE assume the response is always success
+    if response.code == '201'
+      flash[:success] = 'ツイート成功'
+    else
+      flash[:fail] = 'ツイート失敗'
+    end
     redirect_to root_path
   end
 end
