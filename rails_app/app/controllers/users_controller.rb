@@ -14,7 +14,7 @@ class UsersController < ApplicationController
       flash[:success] = '登録成功'
       redirect_to root_path
     else
-      flash.now[:fail] = '登録失敗'
+      flash.now[:alert] = '登録失敗'
       render :new
     end
   end

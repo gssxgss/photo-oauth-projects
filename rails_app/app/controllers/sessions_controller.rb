@@ -7,14 +7,23 @@ class SessionsController < ApplicationController
   end
 
   def create
-    user = User.find_by(user_id: params[:user][:user_id])
-    if user.present? && user.authenticate(params[:user][:password])
+    errors = []
+    errors.push 'ユーザーIDを入力してください。' unless params[:user_id].present?
+    errors.push 'パスワードを入力してください。' unless params[:password].present?
+    if errors.present?
+      flash.now[:alert] = errors.join()
+      render :new, status: 401
+      return
+    end
+
+    user = User.find_by(user_id: params[:user_id])
+    if user.present? && user.authenticate(params[:password])
       log_in(user)
       flash[:success] = 'ログイン成功'
       redirect_to root_path
     else
-      flash.now[:fail] = 'ログイン失敗'
-      render :new
+      flash.now[:alert] = 'ログイン失敗'
+      render :new, status: 401
     end
   end
 
@@ -24,3 +33,7 @@ class SessionsController < ApplicationController
     redirect_to login_path
   end
 end
+
+# NOTE
+# ref: https://stackoverflow.com/questions/71981471/why-is-my-flash-now-not-outputting-after-a-render
+# flash.now[:alert] needs status != 200

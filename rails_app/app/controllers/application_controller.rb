@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   
   def authenticate_user
     unless logged_in?
-      flash.now[:fail] = 'ログインしてください'
+      flash.now[:alert] = 'ログインしてください'
       redirect_to login_path
     end
   end
