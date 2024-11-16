@@ -3,15 +3,13 @@ class SessionsController < ApplicationController
   before_action :redirect_if_authenticated, only: [:new, :create]
 
   def new
-    @user = User.new
   end
 
   def create
-    errors = []
-    errors.push 'ユーザーIDを入力してください。' unless params[:user_id].present?
-    errors.push 'パスワードを入力してください。' unless params[:password].present?
-    if errors.present?
-      flash.now[:alert] = errors.join()
+    @errors = []
+    @errors.push 'ユーザーIDを入力してください。' unless params[:user_id].present?
+    @errors.push 'パスワードを入力してください。' unless params[:password].present?
+    if @errors.present?
       render :new, status: 401
       return
     end
