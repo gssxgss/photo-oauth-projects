@@ -1,12 +1,25 @@
+
+<h1>写真アップロード</h1>
 <%= form_with(model: @photo, url: photos_path, local: true, method: :post, class: '') do |f| %>
+  <!-- エラー -->
+  <% if f.object.errors.full_messages.any? %>
+    <ul class='error'>
+      <% f.object.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
   <div>
     <p><%= f.label :title %></p>
-    <p><%= f.text_field :title, placeholder: 'title' %></p>
+    <p><%= f.text_field :title, placeholder: '30文字まで' %></p>
   </div>
   <div>
     <p><%= f.label :image %></p>
     <p><%= f.file_field :image %></p>
   </div>
-  <%= f.submit 'アップロード' %>
-
+  <p>
+    <%= f.submit 'アップロード' %>
+    <%= link_to 'キャンセル', root_path %>
+  </p>
 <% end %>

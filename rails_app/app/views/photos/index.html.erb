@@ -1,9 +1,5 @@
 <div class="bg-slate-100">
-  <p>
-    <%= link_to "ログアウト", logout_path, data: {turbo_method: :delete} %>
-  </p>
   <h1>写真一覧</h1>
-
 
   <% unless access_token? %>
     <%= link_to 'MyTweetAppと連携', oauth_connect_path %>
@@ -11,14 +7,16 @@
     <p>MyTweetAppと連携中</p>
   <% end %>
   <p>Hello, <%= current_user.user_id %>
-  <p><%= link_to '写真アップロード', new_photo_path %></p>
+  <p><%= link_to '写真をアップロード', new_photo_path %></p>
   <p>You have <%= @photos.length %> photos</p>
   <div style='display: flex; flex-wrap: wrap; gap: 10px;'>
     <% @photos.each do |photo| %>
       <div>
         <%=image_tag photo.image_url, alt: photo.title, width: '200px', height: 'auto' %>
         <p><%= photo.title %></p>
+        <% if access_token? %>
         <%= link_to 'ツイートする', oauth_tweet_path(photo_id: photo.id), data: { turbo_method: :post } %>
+        <% end %>
       </div>
     <% end %>
   </div>

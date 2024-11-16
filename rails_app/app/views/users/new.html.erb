@@ -15,18 +15,18 @@
 
       <!-- Field of registration form -->
       <div class='mb-4'>
-        <%= f.label :user_id, class: 'block text-gray-700 text-sm font-bold mb-2' %>
-        <%= f.text_field :user_id, placeholder: 'User_id', class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight' %>
+        <%= f.label :user_id, class: 'block' %>
+        <%= f.text_field :user_id, placeholder: 'ユーザーID', class: 'block' %>
       </div>
 
       <div class='mb-4'>
         <%= f.label :password %>
-        <%= f.password_field :password, placeholder: 'password' %>
+        <%= f.password_field :password, placeholder: 'パスワード' %>
       </div>
 
       <div class='mb-6'>
         <%= f.label :password_confirmation %>
-        <%= f.password_field :password_confirmation, placeholder: 'password confirmation' %>
+        <%= f.password_field :password_confirmation, placeholder: 'パスワードを再入力してください' %>
       </div>
 
       <div class='row'>

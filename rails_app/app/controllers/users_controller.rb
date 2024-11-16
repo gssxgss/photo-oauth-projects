@@ -15,7 +15,7 @@ class UsersController < ApplicationController
       redirect_to root_path
     else
       flash.now[:alert] = '登録失敗'
-      render :new
+      render :new, status: 400
     end
   end
 

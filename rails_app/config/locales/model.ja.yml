@@ -1,0 +1,16 @@
+ja:
+  activerecord:
+    models:
+      user: ユーザー
+      photo: 写真
+    attributes:
+      user:
+        user_id: ユーザーID
+        password: パスワード
+        password_confirmation: パスワード再入力
+      photo:
+        title: タイトル
+        image: 画像ファイル
+  attributes:
+    created_at: 作成日
+    updated_at: 更新日
