@@ -15,4 +15,8 @@ module SessionsHelper
     session.delete(:user_id)
     @current_user = nil
   end
+
+  def access_token?
+    session.key? 'access_token'
+  end
 end

@@ -26,7 +26,9 @@ class OauthController < ApplicationController
     response = Net::HTTP.post_form(URI.parse('http://unifa-recruit-my-tweet-app.ap-northeast-1.elasticbeanstalk.com/oauth/token'), post_params)
     parsed_json = JSON.parse(response.body).symbolize_keys
     # NOTE assume parsed_json[:token] 100% exists
-    current_user.update! access_token: parsed_json[:access_token]
+    session[:access_token] = parsed_json[:access_token]
+    # TODO remove access_token from user
+    # current_user.update! access_token: parsed_json[:access_token]
     redirect_to root_path
   end
 end
