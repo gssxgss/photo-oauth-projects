@@ -10,7 +10,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      session[:user_id] = @user.id
+      log_in(@user)
       flash[:success] = '登録成功'
       redirect_to root_path
     else

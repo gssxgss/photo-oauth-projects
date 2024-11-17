@@ -57,7 +57,7 @@ class OauthController < ApplicationController
     if response.code == '201'
       flash[:success] = 'ツイート成功'
     else
-      flash[:fail] = 'ツイート失敗'
+      flash[:alert] = 'ツイート失敗'
     end
     redirect_to root_path
   end

@@ -6,7 +6,7 @@
   <% else %>
     <p>MyTweetAppと連携中</p>
   <% end %>
-  <p>Hello, <%= current_user.user_id %>
+  <p>こんにちは, <%= current_user.user_id %>
   <p><%= link_to '写真をアップロード', new_photo_path %></p>
   <p>You have <%= @photos.length %> photos</p>
   <div style='display: flex; flex-wrap: wrap; gap: 10px;'>
