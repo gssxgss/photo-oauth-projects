@@ -1,37 +1,34 @@
-<div class='w-full max-w-xs'>
-  <div class='bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4'>
-    <h2>登録</h2>
+<div class='register-box'>
+  <h1 class='box-header'>登録</h1>
 
-    <%= form_with(model: @user, url: register_path, local: true, class: '') do |f| %>
+  <%= form_with(model: @user, url: register_path, class: 'form') do |f| %>
 
-      <!-- エラー -->
-      <% if f.object.errors.full_messages.any? %>
-        <ul class='alert'>
-          <% f.object.errors.full_messages.each do |msg| %>
-            <li><%= msg %></li>
-          <% end %>
-        </ul>
-      <% end %>
-
-      <!-- Field of registration form -->
-      <div class='mb-4'>
-        <%= f.label :user_id, class: 'block' %>
-        <%= f.text_field :user_id, placeholder: 'ユーザーID', class: 'block' %>
-      </div>
-
-      <div class='mb-4'>
-        <%= f.label :password %>
-        <%= f.password_field :password, placeholder: 'パスワード' %>
-      </div>
-
-      <div class='mb-6'>
-        <%= f.label :password_confirmation %>
-        <%= f.password_field :password_confirmation, placeholder: 'パスワードを再入力してください' %>
-      </div>
-
-      <div class='row'>
-        <%= f.submit '登録' %>
-      </div>
+    <!-- エラー -->
+    <% if f.object.errors.full_messages.any? %>
+      <ul class='alert'>
+        <% f.object.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
     <% end %>
-  </div>
+
+    <div class='form-row'>
+      <%= f.label :user_id, class: 'block' %>
+      <%= f.text_field :user_id, placeholder: 'ユーザーID', class: 'block' %>
+    </div>
+
+    <div class='form-row'>
+      <%= f.label :password %>
+      <%= f.password_field :password, placeholder: 'パスワード' %>
+    </div>
+
+    <div class='form-row'>
+      <%= f.label :password_confirmation %>
+      <%= f.password_field :password_confirmation, placeholder: 'パスワードを再入力してください' %>
+    </div>
+
+    <div class='form-row'>
+      <%= f.submit '登録', class: 'form-btn' %>
+    </div>
+  <% end %>
 </div>

@@ -1,16 +1,28 @@
 :root {
+  --min-content-width: 640px;
+
   --alert-color: rgb(124 45 18);
   --alert-bg: rgb(254 226 226);
   --success-color: rgb(21 128 61);
   --success-bg: rgb(220 252 231);
   --info-color: rgb(12 74 110);
   --info-bg: rgb(224 242 254);
+
+  --box-bg: rgb(241 245 249);
+  --text-color: rgb(15 23 42);
 }
 body {
-  font: 1rem/2 ui-sans-serif;
+  position: relative;
+  min-width: 100vw;
+  min-height: 100vh;
+  font: 1rem/2 ui-sans-serif, sans-serif;
+  color: var(--text-color);
 }
 
 .alert {
+  margin: 0 0 1rem;
+  padding: 1rem 2rem;
+  border-radius: 4px;
   border: 1px solid var(--alert-color);
   background-color: var(--alert-bg);
   color: var(--alert-color);
@@ -26,4 +38,34 @@ body {
     background: var(--alert-bg);
     color: var(--alert-color);
   }
+}
+
+.container {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+}
+
+
+.login-box, .register-box {
+  width: 480px;
+  padding: 2rem 3rem;
+  border-radius: 4px;
+  background-color: var(--box-bg);
+}
+
+.box-header {
+  margin: 0 0 1rem;
+}
+
+.form-row {
+  margin: 0 0 1rem;
+  > label {
+    margin-right: 1rem;
+  }
+}
+
+.form-btn {
+  margin: 1rem 0 0;
+  padding: 0.2rem 1rem;
 }

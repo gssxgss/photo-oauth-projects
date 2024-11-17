@@ -18,14 +18,15 @@
   </head>
 
   <body>
-    <main class="container mx-auto mt-28 px-5 flex">
-      <%= render 'layouts/flash' %>
+    <%= render 'layouts/flash' %>
+    <main class="container">
+      <div>
+        <% if logged_in? %>
+        <p><%= link_to "ログアウト", logout_path, data: {turbo_method: :delete} %></p>
+        <% end %>
 
-      <% if logged_in? %>
-      <p><%= link_to "ログアウト", logout_path, data: {turbo_method: :delete} %></p>
-      <% end %>
-
-      <%= yield %>
+        <%= yield %>
+      </div>
     </main>
   </body>
 </html>
