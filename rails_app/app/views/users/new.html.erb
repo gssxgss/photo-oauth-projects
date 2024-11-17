@@ -6,7 +6,7 @@
 
       <!-- エラー -->
       <% if f.object.errors.full_messages.any? %>
-        <ul class='error'>
+        <ul class='alert'>
           <% f.object.errors.full_messages.each do |msg| %>
             <li><%= msg %></li>
           <% end %>

@@ -1,0 +1,29 @@
+:root {
+  --alert-color: rgb(124 45 18);
+  --alert-bg: rgb(254 226 226);
+  --success-color: rgb(21 128 61);
+  --success-bg: rgb(220 252 231);
+  --info-color: rgb(12 74 110);
+  --info-bg: rgb(224 242 254);
+}
+body {
+  font: 1rem/2 ui-sans-serif;
+}
+
+.alert {
+  border: 1px solid var(--alert-color);
+  background-color: var(--alert-bg);
+  color: var(--alert-color);
+}
+.flash {
+  padding: 1rem;
+  border-bottom: 1px solid var(--success-color);
+  background: var(--success-bg);
+  color: var(--success-color);
+
+  &.flash-alert {
+    border-color: var(--alert-color);
+    background: var(--alert-bg);
+    color: var(--alert-color);
+  }
+}
