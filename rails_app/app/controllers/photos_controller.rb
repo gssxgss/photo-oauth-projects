@@ -15,7 +15,6 @@ class PhotosController < ApplicationController
       flash[:success] = 'アップロード成功'
       redirect_to root_path
     else
-      flash.now[:alert] = 'アップロード失敗'
       render :new, status: 400
     end
   end

@@ -22,7 +22,7 @@
     <main class="container">
       <div>
         <% if logged_in? %>
-        <p><%= link_to "ログアウト", logout_path, data: {turbo_method: :delete} %></p>
+        <%= link_to "ログアウト", logout_path, data: {turbo_method: :delete}, class: 'logout' %>
         <% end %>
 
         <%= yield %>

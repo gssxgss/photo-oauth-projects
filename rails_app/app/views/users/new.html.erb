@@ -1,4 +1,4 @@
-<div class='register-box'>
+<div class='form-box'>
   <h1 class='box-header'>登録</h1>
 
   <%= form_with(model: @user, url: register_path, class: 'form') do |f| %>
@@ -27,8 +27,9 @@
       <%= f.password_field :password_confirmation, placeholder: 'パスワードを再入力してください' %>
     </div>
 
-    <div class='form-row'>
-      <%= f.submit '登録', class: 'form-btn' %>
+    <div class='form-actions'>
+      <%= f.submit '登録' %>
+      <%= link_to 'ログイン', login_path, class: 'form-link' %>
     </div>
   <% end %>
 </div>

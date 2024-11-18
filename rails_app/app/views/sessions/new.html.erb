@@ -1,4 +1,4 @@
-<div class="login-box">
+<div class="form-box">
   <h1 class="box-header">ログイン</h1>
 
   <%= form_with url: login_path, class: 'form' do |f| %>
@@ -21,8 +21,9 @@
       <%= f.password_field :password, placeholder: 'password' %>
     </div>
 
-    <div class='form-row'>
-      <%= f.submit 'ログイン', class: 'form-btn' %>
-    </div>
+    <p class='form-actions'>
+      <%= f.submit 'ログイン' %>
+      <%= link_to 'ユーザー登録', register_path, class: 'form-link' %>
+    </p>
   <% end %>
 </div>

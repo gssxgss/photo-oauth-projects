@@ -1,21 +1,29 @@
-<div class="bg-slate-100">
-  <h1>写真一覧</h1>
+<div>
+  <h1 class='header'>写真一覧</h1>
 
+  <nav class='nav'>
   <% unless access_token? %>
-    <%= link_to 'MyTweetAppと連携', oauth_connect_path %>
+    <%= link_to 'MyTweetAppと連携', oauth_connect_path, class: 'item' %>
   <% else %>
-    <p>MyTweetAppと連携中</p>
+    <span class='item'>MyTweetAppと連携中</span>
   <% end %>
-  <p>こんにちは, <%= current_user.user_id %>
-  <p><%= link_to '写真をアップロード', new_photo_path %></p>
-  <p>You have <%= @photos.length %> photos</p>
-  <div style='display: flex; flex-wrap: wrap; gap: 10px;'>
+  <%= link_to '写真をアップロード', new_photo_path, class: 'item' %>
+  </nav>
+
+  <p class='photo-info'>トータル写真数<%= @photos.length %>枚</p>
+  <div class='photos'>
     <% @photos.each do |photo| %>
-      <div>
-        <%=image_tag photo.image_url, alt: photo.title, width: '200px', height: 'auto' %>
-        <p><%= photo.title %></p>
+      <div class='photo'>
+        <h3 class='photo-title'><%= photo.title %></h3>
+        <div class='photo-container'>
+          <%= link_to photo.image_url do %>
+          <%= image_tag photo.image_url, alt: photo.title, class: 'photo-image' %>
+          <% end %>
+        </div>
         <% if access_token? %>
-        <%= link_to 'ツイートする', oauth_tweet_path(photo_id: photo.id), data: { turbo_method: :post } %>
+        <p class='photo-actions'>
+          <%= link_to 'ツイート', oauth_tweet_path(photo_id: photo.id), data: { turbo_method: :post }, class: 'btn-tweet' %>
+        </p>
         <% end %>
       </div>
     <% end %>
