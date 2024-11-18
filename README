@@ -1,8 +1,15 @@
 # RAILS APP
 
-## setups
+## run server
 
 ```bash
- $ docker compose run app rails new . --skip-git --skip-action-mailer --skip-action-mailbox --skip-action-text skip-active-job --skip-jbuilder --skip-rubocop --database=postgresql
+ $ docker compose build
+ $ docker compose up
  ```
- 
+
+## cost time
+
+- docker setups: 5h+
+- coding: 10h+
+- styling: 2h+
+- test: 1h+
